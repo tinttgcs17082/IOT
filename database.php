@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         VALUES ('" . $Humidity . "', '" . $Temperature . "')";
         
         if ($conn->query($sql) === TRUE) {
-            echo $_REQUEST['text'];
+           
         } 
         else {
             echo "Error: " . $sql . "<br>" . $conn->error;
@@ -70,6 +70,7 @@ function test_input($data) {
 }
 
 ?>
+    <label><?= $_REQUEST['text'] ?></label>
     <a class="btn btn-default" href="index.php">Back</a>
 </body>
 

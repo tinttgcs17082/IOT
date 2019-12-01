@@ -27,7 +27,7 @@
                 <p>...</p>
             </div>
             <div class="col-sm-4">
-                <form action="database.php" method="POST">
+                <form action="database.php" method="GET">
                     <div class="form-group">
                         <label for="text">Input text</label>
                         <input type="text" class="form-control" id="text" name='text'>

@@ -37,16 +37,16 @@ function select($query) {
 	return $result;
 }
 
-if (!empty($_REQUEST)) {
-  $Temperature = $_REQUEST['Temperature'];
-  $Humidity = $_REQUEST['Humidity'];
-  $Time = $_REQUEST['Time'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $Temperature = test_input($_REQUEST['Temperature']);
+  $Humidity = test_input($_REQUEST['Humidity']);
+  $Time = test_input($_REQUEST['Time']);
   // insert, update, delete & select
-  if ($text != "") {
+  
     $query = "insert into `data`(`Temperature`,`Humidity`,`Time`) values('" . $Temperature . "','" . $Humidity . "','" . $Time . "' )";
     query($query);
     header("Location: index.php");
-  }
+  
 }
 
 ?>

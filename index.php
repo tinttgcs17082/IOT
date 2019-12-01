@@ -81,7 +81,7 @@
                         echo '<tbody>
                 <tr> 
                 <td>' . $row_Humidity . '</td> 
-                <td>' . $row_Temperature . "&deg;" .'</td> 
+                <td>' . $row_Temperature . "&deg;C" .'</td> 
                 <td>' . $row_Time . '</td> 
               </tr>
               </tbody>';

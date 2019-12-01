@@ -40,8 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Wrong API Key provided.";
     }
 } else {
-    echo $_REQUEST['text'];
-    echo '<a class="btn btn-default" href="index.html">Back</a>';
+    echo "Hello";
 }
 
 function test_input($data)

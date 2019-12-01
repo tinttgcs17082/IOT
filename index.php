@@ -27,7 +27,7 @@
                 <p>...</p>
             </div>
             <div class="col-sm-4">
-                <form method="GET">
+                <form method="POST">
                     <div class="form-group">
                         <label for="text">Input text</label>
                         <input type="text" class="form-control" id="text" name='text'>

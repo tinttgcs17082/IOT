@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         VALUES ('" . $Humidity . "', '" . $Temperature . "')";
         
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo $_REQUEST['text'];
         } 
         else {
             echo "Error: " . $sql . "<br>" . $conn->error;

@@ -20,7 +20,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($api_key == $api_key_value) {
         $Humidity = test_input($_POST["Humidity"]);
         $Temperature = test_input($_POST["Temperature"]);
-        $Time = test_input($_POST["Time"]);
         
         // Create connection
         $conn = new mysqli($servername, $username, $password, $dbname);
@@ -29,8 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Connection failed: " . $conn->connect_error);
         } 
         
-        $sql = "INSERT INTO `data` (`Humidity`, `Temperature`, `Time`)
-        VALUES ('" . $Humidity . "', '" . $Temperature . "', '" . $Time . "')";
+        $sql = "INSERT INTO `data` (`Humidity`, `Temperature`)
+        VALUES ('" . $Humidity . "', '" . $Temperature . "')";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";

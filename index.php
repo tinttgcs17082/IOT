@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html><body>
 <?php
 
 $servername = "us-cdbr-iron-east-05.cleardb.net";
@@ -9,50 +11,44 @@ $username = "b660d87a23e80f";
 // REPLACE with Database user password
 $password = "6a65c1a0";
 
-// Keep this API Key value to be compatible with the ESP32 code provided in the project page. 
-// If you change this value, the ESP32 sketch needs to match
-$api_key_value = "tPmAT5Ab3j7F9";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
 
-$api_key= $Humidity = $Temperature = $Time = "";
+$sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $api_key = test_input($_POST["api_key"]);
-    if($api_key == $api_key_value) {
-        $Humidity = test_input($_POST["Humidity"]);
-        $Temperature = test_input($_POST["Temperature"]);
-        $Time = test_input($_POST["Time"]);
-        
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        } 
-        
-        $sql = "INSERT INTO `data` (`Humidity`, `Temperature`, `Time`)
-        VALUES ('" . $Humidity . "', '" . $Temperature . "', '" . $Time . "')";
-        
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } 
-        else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    
-        $conn->close();
+echo '<table cellspacing="3" cellpadding="3">
+      <tr> 
+        <td>Humidity</td> 
+        <td>Temperature</td> 
+        <td>Time</td> 
+      </tr>';
+ 
+if ($result = $conn->query($sql)) {
+    while ($row = $result->fetch_assoc()) {
+        $row_Humidity = $row["Humidity"];
+        $row_Temperature = $row["Temperature"];
+        $row_Time = $row["Time"];
+        // Uncomment to set timezone to - 1 hour (you can change 1 to any number)
+        //$row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time - 1 hours"));
+      
+        // Uncomment to set timezone to + 4 hours (you can change 4 to any number)
+        //$row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time + 4 hours"));
+      
+        echo '<tr> 
+                <td>' . $row_Humidity . '</td> 
+                <td>' . $row_Temperature . '</td> 
+                <td>' . $row_Time . '</td> 
+              </tr>';
     }
-    else {
-        echo "Wrong API Key provided.";
-    }
-
-}
-else {
-    echo "No data posted with HTTP POST.";
+    $result->free();
 }
 
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+$conn->close();
+?> 
+</table>
+</body>
+</html>

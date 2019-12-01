@@ -40,10 +40,10 @@ function select($query) {
 if (!empty($_REQUEST)) {
   $Temperature = $_REQUEST['Temperature'];
   $Humidity = $_REQUEST['Humidity'];
-  $Humidity = $_REQUEST['Time'];
+  $Time = $_REQUEST['Time'];
   // insert, update, delete & select
   if ($text != "") {
-    $query = "insert into `data`(`Temperature`,`Humidity`,`Time`) values('" . $Temperature . "','" . $Humidity . "','" . $Humidity . "' )";
+    $query = "insert into `data`(`Temperature`,`Humidity`,`Time`) values('" . $Temperature . "','" . $Humidity . "','" . $Time . "' )";
     query($query);
     header("Location: index.php");
   }

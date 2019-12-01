@@ -14,6 +14,17 @@ function query($query) {
 	$conn->close();
 }
 
+if (!empty($_REQUEST)) {
+  $Temperature = $_REQUEST['Temperature'];
+  $Humidity = $_REQUEST['Humidity'];
+  $Time = $_REQUEST['Time'];
+  // insert, update, delete & select
+  
+    $query = "insert into `data`(`Temperature`,`Humidity`,`Time`) values('" . $Temperature . "','" . $Humidity . "','" . $Time . "' )";
+    query($query);
+    header("Location: index.php");
+}
+
 function select($query) {
 
 	$conn = new mysqli('us-cdbr-iron-east-05.cleardb.net', 'b660d87a23e80f', '6a65c1a0', 'heroku_4c775eb85947f23');
@@ -27,17 +38,6 @@ function select($query) {
 	return $result;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $Temperature = $_REQUEST['Temperature'];
-  $Humidity = $_REQUEST['Humidity'];
-  $Time = $_REQUEST['Time'];
-  // insert, update, delete & select
-  
-    $query = "insert into `data`(`Temperature`,`Humidity`,`Time`) values('" . $Temperature . "','" . $Humidity . "','" . $Time . "' )";
-    query($query);
-    header("Location: index.php");
-  
-}
 
 ?>
 

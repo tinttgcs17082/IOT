@@ -57,7 +57,7 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                $sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC";
+                $sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10";
 
                 echo '<table class="table table-striped">
     <thead>

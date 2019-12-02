@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Wrong API Key provided.";
     }
 } else {
-    echo "Hello";
+    echo "No data";
 }
 
 function test_input($data)

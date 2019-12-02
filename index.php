@@ -34,7 +34,13 @@
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
+                <?php if (!empty($_REQUEST['text'])) { ?>
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> You have just sent <b><?= $_REQUEST['text'] ?> </b> to the LCD
+                    </div>
+                <?php } ?>
             </div>
+
         </div>
         <div class="row">
             <div class="col-sm-4"></div>
@@ -81,7 +87,7 @@
                         echo '<tbody>
                 <tr> 
                 <td>' . $row_Humidity . '</td> 
-                <td>' . $row_Temperature . "&deg;C" .'</td> 
+                <td>' . $row_Temperature . "&deg;C" . '</td> 
                 <td>' . $row_Time . '</td> 
               </tr>
               </tbody>';

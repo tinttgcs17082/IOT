@@ -24,7 +24,7 @@
                 <p>Hồ Ngọc Tân</p>
                 <p>Trương Trung Tín</p>
                 <p>Trần Xuân Thới</p>
-                <p>...</p>
+                <p>Phùng Văn Hảo</p>
             </div>
             <div class="col-sm-4">
                 <form action="mqtt.php" method="POST">

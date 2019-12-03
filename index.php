@@ -83,7 +83,7 @@
                 <tr> 
                 <td>' . $row_Humidity . "%" .'</td> 
                 <td>' . $row_Temperature . "&deg;C" . '</td> 
-                <td>' . $row_Time . '</td> 
+                <td>' . $rowtime = date("Y-m-d H:i:s", strtotime("$row_Time + 7 hours")) . '</td> 
               </tr>
               </tbody>';
                     }

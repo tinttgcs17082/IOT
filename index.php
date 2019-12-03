@@ -66,27 +66,22 @@
                 $sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10";
 
                 echo '<table class="table table-striped">
-    <thead>
-      <tr> 
-        <td>Humidity</td> 
-        <td>Temperature</td> 
-        <td>Time</td> 
-      </tr>
-    </thead>';
+            <thead>
+            <tr> 
+                <td>Humidity</td> 
+                <td>Temperature</td> 
+                <td>Time</td> 
+            </tr>
+            </thead>';
                 if ($result = $conn->query($sql)) {
                     while ($row = $result->fetch_assoc()) {
                         $row_Humidity = $row["Humidity"];
                         $row_Temperature = $row["Temperature"];
                         $row_Time = $row["Time"];
-                        // Uncomment to set timezone to - 1 hour (you can change 1 to any number)
-                        //$row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time - 1 hours"));
-
-                        // Uncomment to set timezone to + 4 hours (you can change 4 to any number)
-                        //$row_reading_time = date("Y-m-d H:i:s", strtotime("$row_reading_time + 4 hours"));
 
                         echo '<tbody>
                 <tr> 
-                <td>' . $row_Humidity . '</td> 
+                <td>' . $row_Humidity . "%" .'</td> 
                 <td>' . $row_Temperature . "&deg;C" . '</td> 
                 <td>' . $row_Time . '</td> 
               </tr>

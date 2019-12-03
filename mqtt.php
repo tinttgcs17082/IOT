@@ -34,8 +34,6 @@ if ($mqtt->connect(true, NULL, $username, $password)) {
     echo "Time out!\n";
 }
 
-
-
 function test_input($data)
 {
     $data = trim($data);

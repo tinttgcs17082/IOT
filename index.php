@@ -81,7 +81,7 @@
                                 <tr>
                                     <td><?= $row_Humidity . "%" ?></td>
                                     <td><?= $row_Temperature . "&deg;C" ?></td>
-                                    <td><?= $rowtime = date("H:i:s d-m-Y", strtotime("$row_Time")) ?></td>
+                                    <td><?= $rowtime = date("H:i:s d-m-Y", strtotime("$row_Time + 7 HOUR")) ?></td>
                                 </tr>
                             </tbody>
                     <?php

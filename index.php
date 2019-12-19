@@ -94,7 +94,7 @@
         </div>
     </div>
     <label for="Humidity">Humidity</label><br>
-    <canvas name='Humidity' id="Humidity" width="1800" height="400"></canvas>
+    <canvas name='Humidity' id="Humidity" width="1800" height="400"></canvas><br>
     <label for="Temperature">Temperature</label><br>
     <canvas id="Temperature" width="1800" height="400"></canvas>
 

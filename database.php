@@ -1,10 +1,12 @@
 <?php
 
 $servername = "us-cdbr-iron-east-05.cleardb.net";
-
-$dbname = "heroku_4c775eb85947f23";
-$username = "b660d87a23e80f";
-$password = "6a65c1a0";
+// REPLACE with your Database name
+$dbname = "heroku_ca51e06b9c53da8";
+// REPLACE with Database user
+$username = "bc9d80a1ea1272";
+// REPLACE with Database user password
+$password = "a5619782";
 $api_key_value = "tPmAT5Ab3j7F9";
 
 $api_key = $Humidity = $Temperature = $Time = "";

@@ -46,13 +46,14 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
+      
                 <?php $servername = "us-cdbr-iron-east-05.cleardb.net";
                     // REPLACE with your Database name
-                    $dbname = "heroku_4c775eb85947f23";
+                    $dbname = "heroku_ca51e06b9c53da8";
                     // REPLACE with Database user
-                    $username = "b660d87a23e80f";
+                    $username = "bc9d80a1ea1272";
                     // REPLACE with Database user password
-                    $password = "6a65c1a0";
+                    $password = "a5619782";
 
                     // Create connection
                     $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -121,7 +122,6 @@
                 }       
             }
         }
-        
       
     ?>
     <script>

@@ -60,9 +60,9 @@
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
-
                     $sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10"; 
-                    $sqli = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10"; ?>
+                    ?>
+                    
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -81,7 +81,7 @@
                                 <tr>
                                     <td><?= $row_Humidity . "%" ?></td>
                                     <td><?= $row_Temperature . "&deg;C" ?></td>
-                                    <td><?= $rowtime = date("H:i:s d-m-Y", strtotime("$row_Time + 7 hours")) ?></td>
+                                    <td><?= $rowtime = date("H:i:s d-m-Y", strtotime("$row_Time")) ?></td>
                                 </tr>
                             </tbody>
                     <?php
@@ -89,60 +89,64 @@
                             $result->free();
                     }
                     ?>
-                   
                 </table>
             </div>
         </div>
     </div>
     <label for="Humidity">Humidity</label>
-    <canvas name='Humidity' id="Humidity" width="600" height="400"></canvas>
+    <canvas name='Humidity' id="Humidity" width="1800" height="400"></canvas>
     <label for="Temperature">Temperature</label>
-    <canvas id="Temperature" width="600" height="400"></canvas>
+    <canvas id="Temperature" width="1800" height="400"></canvas>
 
     <?php
-       $result = mysqli_query($conn,$sqli);
-       $array_Humi = array();
-       $array_Time = array();
-       $array_Temp = array();
-       while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-            $row_Time = $row["Time"];
-            $rowtime = date("H:i:s", strtotime("$row_Time + 7 hours"));
-           array_push($array_Humi, $row["Humidity"]);
-           array_push($array_Time,$rowtime);
-           array_push($array_Temp,$row["Temperature"]);
-
-
-       }  
+        $array_Humi = array();
+        $array_Time = array();
+        $array_Temp = array();
+        for ($j=1; $j < 31; $j++) { 
+            $sqli = "SELECT ROUND(AVG(`Humidity`)), ROUND(AVG(`Temperature`)), `Time` FROM `data` where `Time` LIKE '%2019-12-$j %';"; 
+            $result = mysqli_query($conn,$sqli);
+            foreach ($result as $key => $result) {
+                if($result["Time"]==null or $result["ROUND(AVG(`Humidity`))"]==null or $result["ROUND(AVG(`Temperature`))"]==null){
+                    continue;
+                }
+                else{
+                    array_push($array_Humi, $result["ROUND(AVG(`Humidity`))"]);
+                    array_push($array_Time,$result["Time"]);
+                    array_push($array_Temp,$result["ROUND(AVG(`Temperature`))"]);
+                }
+                
+            }       
+        }
+      
     ?>
     <script>
 // line chart data
     var Humidity = {
 
-    labels :<?= json_encode($array_Time); ?>,
-    datasets : [
-        {
-            fillColor : "rgba(172,194,132,0.4)",
-            strokeColor : "#ACC26D",
-            pointColor : "#fff",
-            pointStrokeColor : "#9DB86D",
-            data : <?= json_encode($array_Humi); ?>
-        }
-    ]
-}
-
-var Temperature = {
-
-labels :<?= json_encode($array_Time); ?>,
-datasets : [
-    {
-        fillColor : "rgba(172,194,132,0.4)",
-        strokeColor : "#ACC26D",
-        pointColor : "#fff",
-        pointStrokeColor : "#9DB86D",
-        data : <?= json_encode($array_Temp); ?>
+        labels :<?= json_encode($array_Time); ?>,
+        datasets : [
+            {
+                fillColor : "rgba(172,194,132,0.4)",
+                strokeColor : "#ACC26D",
+                pointColor : "#fff",
+                pointStrokeColor : "#9DB86D",
+                data : <?= json_encode($array_Humi); ?>
+            }
+        ]
     }
-]
-}
+
+    var Temperature = {
+        labels :<?= json_encode($array_Time); ?>,
+        datasets : [
+            {
+                fillColor : "rgba(172,194,132,0.4)",
+                strokeColor : "#ACC26D",
+                pointColor : "#fff",
+                pointStrokeColor : "#9DB86D",
+                data : <?= json_encode($array_Temp); ?>
+            }
+        ]
+    }
     var humidity = document.getElementById('Humidity').getContext('2d');
     new Chart(humidity).Line(Humidity);
     var temperature = document.getElementById('Temperature').getContext('2d');

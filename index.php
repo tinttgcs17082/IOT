@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src='Chart.min.js'></script>
 </head>
 
 <body>
@@ -45,57 +46,110 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <?php
+                <?php $servername = "us-cdbr-iron-east-05.cleardb.net";
+                    // REPLACE with your Database name
+                    $dbname = "heroku_4c775eb85947f23";
+                    // REPLACE with Database user
+                    $username = "b660d87a23e80f";
+                    // REPLACE with Database user password
+                    $password = "6a65c1a0";
 
-                $servername = "us-cdbr-iron-east-05.cleardb.net";
-
-                // REPLACE with your Database name
-                $dbname = "heroku_4c775eb85947f23";
-                // REPLACE with Database user
-                $username = "b660d87a23e80f";
-                // REPLACE with Database user password
-                $password = "6a65c1a0";
-
-                // Create connection
-                $conn = new mysqli($servername, $username, $password, $dbname);
-                // Check connection
-                if ($conn->connect_error) {
-                    die("Connection failed: " . $conn->connect_error);
-                }
-
-                $sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10";
-
-                echo '<table class="table table-striped">
-            <thead>
-            <tr> 
-                <td>Humidity</td> 
-                <td>Temperature</td> 
-                <td>Time</td> 
-            </tr>
-            </thead>';
-                if ($result = $conn->query($sql)) {
-                    while ($row = $result->fetch_assoc()) {
-                        $row_Humidity = $row["Humidity"];
-                        $row_Temperature = $row["Temperature"];
-                        $row_Time = $row["Time"];
-
-                        echo '<tbody>
-                <tr> 
-                <td>' . $row_Humidity . "%" .'</td> 
-                <td>' . $row_Temperature . "&deg;C" . '</td> 
-                <td>' . $rowtime = date("Y-m-d H:i:s", strtotime("$row_Time + 7 hours")) . '</td> 
-              </tr>
-              </tbody>';
+                    // Create connection
+                    $conn = mysqli_connect($servername, $username, $password, $dbname);
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
                     }
-                    $result->free();
-                }
 
-                $conn->close();
-                ?>
+                    $sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10"; 
+                    $sqli = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10"; ?>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Humidity</td>
+                            <td>Temperature</td>
+                            <td>Time</td>
+                        </tr>
+                    </thead>
+                    <?php if ($result = $conn->query($sql)) {
+                            while ($row = $result->fetch_assoc()) {
+                                $row_Humidity = $row["Humidity"];
+                                $row_Temperature = $row["Temperature"];
+                                $row_Time = $row["Time"]; ?>
+
+                            <tbody>
+                                <tr>
+                                    <td><?= $row_Humidity . "%" ?></td>
+                                    <td><?= $row_Temperature . "&deg;C" ?></td>
+                                    <td><?= $rowtime = date("H:i:s d-m-Y", strtotime("$row_Time + 7 hours")) ?></td>
+                                </tr>
+                            </tbody>
+                    <?php
+                            }
+                            $result->free();
+                    }
+                    ?>
+                   
                 </table>
             </div>
         </div>
+    </div>
+    <label for="Humidity">Humidity</label>
+    <canvas name='Humidity' id="Humidity" width="600" height="400"></canvas>
+    <label for="Temperature">Temperature</label>
+    <canvas id="Temperature" width="600" height="400"></canvas>
 
+    <?php
+       $result = mysqli_query($conn,$sqli);
+       $array_Humi = array();
+       $array_Time = array();
+       $array_Temp = array();
+       while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $row_Time = $row["Time"];
+            $rowtime = date("H:i:s", strtotime("$row_Time + 7 hours"));
+           array_push($array_Humi, $row["Humidity"]);
+           array_push($array_Time,$rowtime);
+           array_push($array_Temp,$row["Temperature"]);
+
+
+       }  
+    ?>
+    <script>
+// line chart data
+    var Humidity = {
+
+    labels :<?= json_encode($array_Time); ?>,
+    datasets : [
+        {
+            fillColor : "rgba(172,194,132,0.4)",
+            strokeColor : "#ACC26D",
+            pointColor : "#fff",
+            pointStrokeColor : "#9DB86D",
+            data : <?= json_encode($array_Humi); ?>
+        }
+    ]
+}
+
+var Temperature = {
+
+labels :<?= json_encode($array_Time); ?>,
+datasets : [
+    {
+        fillColor : "rgba(172,194,132,0.4)",
+        strokeColor : "#ACC26D",
+        pointColor : "#fff",
+        pointStrokeColor : "#9DB86D",
+        data : <?= json_encode($array_Temp); ?>
+    }
+]
+}
+    var humidity = document.getElementById('Humidity').getContext('2d');
+    new Chart(humidity).Line(Humidity);
+    var temperature = document.getElementById('Temperature').getContext('2d');
+    new Chart(temperature).Line(Temperature);
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 </body>
 
 </html>

@@ -93,30 +93,35 @@
             </div>
         </div>
     </div>
-    <label for="Humidity">Humidity</label>
+    <label for="Humidity">Humidity</label><br>
     <canvas name='Humidity' id="Humidity" width="1800" height="400"></canvas>
-    <label for="Temperature">Temperature</label>
+    <label for="Temperature">Temperature</label><br>
     <canvas id="Temperature" width="1800" height="400"></canvas>
 
     <?php
         $array_Humi = array();
         $array_Time = array();
         $array_Temp = array();
-        for ($j=1; $j < 31; $j++) { 
-            $sqli = "SELECT ROUND(AVG(`Humidity`)), ROUND(AVG(`Temperature`)), `Time` FROM `data` where `Time` LIKE '%2019-12-$j %';"; 
-            $result = mysqli_query($conn,$sqli);
-            foreach ($result as $key => $result) {
-                if($result["Time"]==null or $result["ROUND(AVG(`Humidity`))"]==null or $result["ROUND(AVG(`Temperature`))"]==null){
-                    continue;
-                }
-                else{
-                    array_push($array_Humi, $result["ROUND(AVG(`Humidity`))"]);
-                    array_push($array_Time,$result["Time"]);
-                    array_push($array_Temp,$result["ROUND(AVG(`Temperature`))"]);
-                }
-                
-            }       
+        for ($i=1; $i < 13; $i++) { 
+            for ($j=1; $j < 32; $j++) { 
+                $sqli = "SELECT ROUND(AVG(`Humidity`)), ROUND(AVG(`Temperature`)), `Time` FROM `data` where `Time` LIKE '%2019-$i-$j %';"; 
+                $result = mysqli_query($conn,$sqli);
+                foreach ($result as $key => $result) {
+                    if($result["Time"]==null or $result["ROUND(AVG(`Humidity`))"]==null or $result["ROUND(AVG(`Temperature`))"]==null){
+                        continue;
+                    }
+                    else{
+                        array_push($array_Humi, $result["ROUND(AVG(`Humidity`))"]);
+                        $row = $result['Time'];
+                        $rowtime = date("d-m-Y", strtotime("$row"));
+                        array_push($array_Time, $rowtime );
+                        array_push($array_Temp,$result["ROUND(AVG(`Temperature`))"]);
+                    }
+                    
+                }       
+            }
         }
+        
       
     ?>
     <script>

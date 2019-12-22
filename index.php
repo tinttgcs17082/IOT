@@ -122,8 +122,8 @@
                 }       
             }
         }
-        $new_array_time = array_slice($array_Time, 0, 5);
-        $new_array_humi = array_slice($array_Humi, 0, 5); 
+        $new_array_time = array_slice($array_Time, -1, -5);
+        $new_array_humi = array_slice($array_Humi, -1, -5); 
     ?>
     <script>
 // line chart data

@@ -94,10 +94,16 @@
             </div>
         </div>
     </div>
-    <label for="Humidity">Humidity</label><br>
-    <canvas name='Humidity' id="Humidity" width="1920" height="500"></canvas><br>
+    <div style="text-align: center">
+    <label  for="Humidity">Humidity</label><br>
+    <canvas name='Humidity' id="Humidity" width="1800" height="500"></canvas><br>
+    </div>
+    <div style="text-align: center">
     <label for="Temperature">Temperature</label><br>
-    <canvas id="Temperature" width="1920" height="500"></canvas>
+    <canvas id="Temperature" width="1800" height="500"></canvas>
+    </div>
+    
+    
 
     <?php
         $array_Humi = array();
@@ -122,36 +128,36 @@
                 }       
             }
         }
-        $new_array_time = array_slice(array_reverse($array_Time, True), 0, 10);
-        $new_array_humi = array_slice(array_reverse($array_Humi, True), 0, 10); 
-        $new_array_Temp = array_slice(array_reverse($array_Temp, True), 0, 10); 
+        // $new_array_time = array_slice(array_reverse($array_Time, True), 0, 10);
+        // $new_array_humi = array_slice(array_reverse($array_Humi, True), 0, 10); 
+        // $new_array_Temp = array_slice(array_reverse($array_Temp, True), 0, 10); 
 
     ?>
     <script>
 // line chart data
     var Humidity = {
 
-        labels :<?= json_encode($new_array_time); ?>,
+        labels :<?= json_encode($array_Time); ?>,
         datasets : [
             {
                 fillColor : "rgba(172,194,132,0.4)",
                 strokeColor : "#ACC26D",
                 pointColor : "#fff",
                 pointStrokeColor : "#9DB86D",
-                data : <?= json_encode($new_array_humi); ?>
+                data : <?= json_encode($array_Humi); ?>
             }
         ]
     }
 
     var Temperature = {
-        labels :<?= json_encode($new_array_time); ?>,
+        labels :<?= json_encode($array_Time); ?>,
         datasets : [
             {
                 fillColor : "rgba(172,194,132,0.4)",
                 strokeColor : "#ACC26D",
                 pointColor : "#fff",
                 pointStrokeColor : "#9DB86D",
-                data : <?= json_encode($new_array_Temp); ?>
+                data : <?= json_encode($array_Temp); ?>
             }
         ]
     }

@@ -144,7 +144,7 @@
     }
 
     var Temperature = {
-        labels :<?= json_encode($array_Time); ?>,
+        labels :<?= json_encode($new_array_time); ?>,
         datasets : [
             {
                 fillColor : "rgba(172,194,132,0.4)",

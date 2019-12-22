@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row">
             <div style="text-align: center" class="col-sm-4">
-                <h2>Team member - </h2>
+                <h2>Team member</h2>
                 <table class="table">
                     <thead>
                         <tr>
@@ -63,10 +63,6 @@
                     </div>
                 <?php } ?>
             </div>
-
-        </div>
-        <div class="row">
-            <div class="col-sm-4"></div>
             <div class="col-sm-4">
 
                 <?php $servername = "us-cdbr-iron-east-05.cleardb.net";

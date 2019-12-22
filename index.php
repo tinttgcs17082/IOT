@@ -20,12 +20,34 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-4">
-                <h2>Team member</h2>
-                <p>Hồ Ngọc Tân</p>
-                <p>Trương Trung Tín</p>
-                <p>Trần Xuân Thới</p>
-                <p>Phùng Văn Hảo</p>
+            <div style="text-align: center" class="col-sm-4">
+                <h2>Team member - </h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Hồ Ngọc Tân</td>
+                            <td>TanHNGCS17077@fpt.edu.vn</td>
+                        </tr>
+                        <tr>
+                            <td>Trần Xuân Thới</td>
+                            <td>ThoiTXGCS18166@fpt.edu.vn</td>
+                        </tr>
+                        <tr>
+                            <td>Phùng Văn Hảo</td>
+                            <td>HaoPVGCS17486@fpt.edu.vn</td>
+                        </tr>
+                        <tr>
+                            <td>Trương Trung Tín</td>
+                            <td>TinTTGCS17082@fpt.edu.vn</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="col-sm-4">
                 <form action="mqtt.php" method="POST">
@@ -46,24 +68,24 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-      
-                <?php $servername = "us-cdbr-iron-east-05.cleardb.net";
-                    // REPLACE with your Database name
-                    $dbname = "heroku_ca51e06b9c53da8";
-                    // REPLACE with Database user
-                    $username = "bc9d80a1ea1272";
-                    // REPLACE with Database user password
-                    $password = "a5619782";
 
-                    // Create connection
-                    $conn = mysqli_connect($servername, $username, $password, $dbname);
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-                    $sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10"; 
-                    ?>
-                    
+                <?php $servername = "us-cdbr-iron-east-05.cleardb.net";
+                // REPLACE with your Database name
+                $dbname = "heroku_ca51e06b9c53da8";
+                // REPLACE with Database user
+                $username = "bc9d80a1ea1272";
+                // REPLACE with Database user password
+                $password = "a5619782";
+
+                // Create connection
+                $conn = mysqli_connect($servername, $username, $password, $dbname);
+                // Check connection
+                if ($conn->connect_error) {
+                    die("Connection failed: " . $conn->connect_error);
+                }
+                $sql = "SELECT `Humidity`, `Temperature`, `Time` FROM `data` ORDER BY id DESC LIMIT 10";
+                ?>
+
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -73,10 +95,10 @@
                         </tr>
                     </thead>
                     <?php if ($result = $conn->query($sql)) {
-                            while ($row = $result->fetch_assoc()) {
-                                $row_Humidity = $row["Humidity"];
-                                $row_Temperature = $row["Temperature"];
-                                $row_Time = $row["Time"]; ?>
+                        while ($row = $result->fetch_assoc()) {
+                            $row_Humidity = $row["Humidity"];
+                            $row_Temperature = $row["Temperature"];
+                            $row_Time = $row["Time"]; ?>
 
                             <tbody>
                                 <tr>
@@ -86,8 +108,8 @@
                                 </tr>
                             </tbody>
                     <?php
-                            }
-                            $result->free();
+                        }
+                        $result->free();
                     }
                     ?>
                 </table>
@@ -95,77 +117,71 @@
         </div>
     </div>
     <div style="text-align: center">
-    <label  for="Humidity">Humidity</label><br>
-    <canvas name='Humidity' id="Humidity" width="1800" height="500"></canvas><br>
+        <label for="Humidity">Humidity</label><br>
+        <canvas name='Humidity' id="Humidity" width="1800" height="500"></canvas><br>
     </div>
     <div style="text-align: center">
-    <label for="Temperature">Temperature</label><br>
-    <canvas id="Temperature" width="1800" height="500"></canvas>
+        <label for="Temperature">Temperature</label><br>
+        <canvas id="Temperature" width="1800" height="500"></canvas>
     </div>
-    
-    
+
+
 
     <?php
-        $array_Humi = array();
-        $array_Time = array();
-        $array_Temp = array();
-        for ($i=1; $i < 13; $i++) { 
-            for ($j=1; $j < 32; $j++) { 
-                $sqli = "SELECT ROUND(AVG(`Humidity`)), ROUND(AVG(`Temperature`)), `Time` FROM `data` where `Time` LIKE '%2019-$i-$j %';"; 
-                $result = mysqli_query($conn,$sqli);
-                foreach ($result as $key => $result) {
-                    if($result["Time"]==null or $result["ROUND(AVG(`Humidity`))"]==null or $result["ROUND(AVG(`Temperature`))"]==null){
-                        continue;
-                    }
-                    else{
-                        array_push($array_Humi, $result["ROUND(AVG(`Humidity`))"]);
-                        $row = $result['Time'];
-                        $rowtime = date("d-m-Y", strtotime("$row"));
-                        array_push($array_Time, $rowtime );
-                        array_push($array_Temp,$result["ROUND(AVG(`Temperature`))"]);
-                    }
-                    
-                }       
+    $array_Humi = array();
+    $array_Time = array();
+    $array_Temp = array();
+    for ($i = 1; $i < 13; $i++) {
+        for ($j = 1; $j < 32; $j++) {
+            $sqli = "SELECT ROUND(AVG(`Humidity`)), ROUND(AVG(`Temperature`)), `Time` FROM `data` where `Time` LIKE '%2019-$i-$j %';";
+            $result = mysqli_query($conn, $sqli);
+            foreach ($result as $key => $result) {
+                if ($result["Time"] == null or $result["ROUND(AVG(`Humidity`))"] == null or $result["ROUND(AVG(`Temperature`))"] == null) {
+                    continue;
+                } else {
+                    array_push($array_Humi, $result["ROUND(AVG(`Humidity`))"]);
+                    $row = $result['Time'];
+                    $rowtime = date("d-m-Y", strtotime("$row"));
+                    array_push($array_Time, $rowtime);
+                    array_push($array_Temp, $result["ROUND(AVG(`Temperature`))"]);
+                }
             }
         }
-        // $new_array_time = array_slice(array_reverse($array_Time, True), 0, 10);
-        // $new_array_humi = array_slice(array_reverse($array_Humi, True), 0, 10); 
-        // $new_array_Temp = array_slice(array_reverse($array_Temp, True), 0, 10); 
+    }
+    // $new_array_time = array_slice(array_reverse($array_Time, True), 0, 10);
+    // $new_array_humi = array_slice(array_reverse($array_Humi, True), 0, 10); 
+    // $new_array_Temp = array_slice(array_reverse($array_Temp, True), 0, 10); 
 
     ?>
     <script>
-// line chart data
-    var Humidity = {
+        // line chart data
+        var Humidity = {
 
-        labels :<?= json_encode($array_Time); ?>,
-        datasets : [
-            {
-                fillColor : "rgba(172,194,132,0.4)",
-                strokeColor : "#ACC26D",
-                pointColor : "#fff",
-                pointStrokeColor : "#9DB86D",
-                data : <?= json_encode($array_Humi); ?>
-            }
-        ]
-    }
+            labels: <?= json_encode($array_Time); ?>,
+            datasets: [{
+                fillColor: "rgba(172,194,132,0.4)",
+                strokeColor: "#ACC26D",
+                pointColor: "#fff",
+                pointStrokeColor: "#9DB86D",
+                data: <?= json_encode($array_Humi); ?>
+            }]
+        }
 
-    var Temperature = {
-        labels :<?= json_encode($array_Time); ?>,
-        datasets : [
-            {
-                fillColor : "rgba(172,194,132,0.4)",
-                strokeColor : "#ACC26D",
-                pointColor : "#fff",
-                pointStrokeColor : "#9DB86D",
-                data : <?= json_encode($array_Temp); ?>
-            }
-        ]
-    }
-    var humidity = document.getElementById('Humidity').getContext('2d');
-    new Chart(humidity).Line(Humidity);
-    var temperature = document.getElementById('Temperature').getContext('2d');
-    new Chart(temperature).Line(Temperature);
-</script>
+        var Temperature = {
+            labels: <?= json_encode($array_Time); ?>,
+            datasets: [{
+                fillColor: "rgba(172,194,132,0.4)",
+                strokeColor: "#ACC26D",
+                pointColor: "#fff",
+                pointStrokeColor: "#9DB86D",
+                data: <?= json_encode($array_Temp); ?>
+            }]
+        }
+        var humidity = document.getElementById('Humidity').getContext('2d');
+        new Chart(humidity).Line(Humidity);
+        var temperature = document.getElementById('Temperature').getContext('2d');
+        new Chart(temperature).Line(Temperature);
+    </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
 </body>

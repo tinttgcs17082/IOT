@@ -95,9 +95,9 @@
         </div>
     </div>
     <label for="Humidity">Humidity</label><br>
-    <canvas name='Humidity' id="Humidity" width="1800" height="400"></canvas><br>
+    <canvas name='Humidity' id="Humidity" width="1920" height="500"></canvas><br>
     <label for="Temperature">Temperature</label><br>
-    <canvas id="Temperature" width="1800" height="400"></canvas>
+    <canvas id="Temperature" width="1920" height="500"></canvas>
 
     <?php
         $array_Humi = array();
@@ -122,20 +122,21 @@
                 }       
             }
         }
-      
+        $new_array_time = array_slice($array_Time, 0, 5);
+        $new_array_humi = array_slice($array_Humi, 0, 5); 
     ?>
     <script>
 // line chart data
     var Humidity = {
 
-        labels :<?= json_encode($array_Time); ?>,
+        labels :<?= json_encode($new_array_time); ?>,
         datasets : [
             {
                 fillColor : "rgba(172,194,132,0.4)",
                 strokeColor : "#ACC26D",
                 pointColor : "#fff",
                 pointStrokeColor : "#9DB86D",
-                data : <?= json_encode($array_Humi); ?>
+                data : <?= json_encode($new_array_humi); ?>
             }
         ]
     }

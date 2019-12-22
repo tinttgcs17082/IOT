@@ -124,6 +124,8 @@
         }
         $new_array_time = array_slice(array_reverse($array_Time, True), 0, 10);
         $new_array_humi = array_slice(array_reverse($array_Humi, True), 0, 10); 
+        $new_array_Temp = array_slice(array_reverse($array_Temp, True), 0, 10); 
+
     ?>
     <script>
 // line chart data
@@ -149,7 +151,7 @@
                 strokeColor : "#ACC26D",
                 pointColor : "#fff",
                 pointStrokeColor : "#9DB86D",
-                data : <?= json_encode($array_Temp); ?>
+                data : <?= json_encode($new_array_Temp); ?>
             }
         ]
     }

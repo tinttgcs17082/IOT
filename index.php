@@ -137,7 +137,7 @@
                 } else {
                     array_push($array_Humi, $result["ROUND(AVG(`Humidity`))"]);
                     $row = $result['Time'];
-                    $rowtime = date("d-m-Y", strtotime("$row"));
+                    $rowtime = date("d-m-Y", strtotime("$row + 7 HOUR"));
                     array_push($array_Time, $rowtime);
                     array_push($array_Temp, $result["ROUND(AVG(`Temperature`))"]);
                 }

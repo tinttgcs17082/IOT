@@ -22,27 +22,10 @@
         <div class="row">
             <div style="text-align: center" class="col-sm-4">
                 <h2>Team member</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Hồ Ngọc Tân</td>
-                        </tr>
-                        <tr>
-                            <td>Trần Xuân Thới</td>
-                        </tr>
-                        <tr>
-                            <td>Phùng Văn Hảo</td>
-                        </tr>
-                        <tr>
-                            <td>Trương Trung Tín</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <p>Hồ Ngọc Tân</p>
+                <p>Trương Trung Tín</p>
+                <p>Trần Xuân Thới</p>
+                <p>Phùng Văn Hảo</p>
             </div>
             <div class="col-sm-4">
                 <form action="mqtt.php" method="POST">

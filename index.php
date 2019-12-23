@@ -109,7 +109,7 @@
     $array_Temp = array();
     for ($i = 1; $i < 13; $i++) {
         for ($j = 1; $j < 32; $j++) {
-            $sqli = "SELECT ROUND(AVG(`Humidity`)), ROUND(AVG(`Temperature`)), `Time` FROM `data` where `Time` LIKE '%2019-$i-$j %';";
+            $sqli = "SELECT AVG(`Humidity`), AVG(`Temperature`), `Time` FROM `data` where `Time` LIKE '%2019-$i-$j %';";
             $result = mysqli_query($conn, $sqli);
             foreach ($result as $key => $result) {
                 if ($result["Time"] == null or $result["ROUND(AVG(`Humidity`))"] == null or $result["ROUND(AVG(`Temperature`))"] == null) {

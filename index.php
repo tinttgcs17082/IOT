@@ -26,25 +26,20 @@
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Email</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Hồ Ngọc Tân</td>
-                            <td>TanHNGCS17077@fpt.edu.vn</td>
                         </tr>
                         <tr>
                             <td>Trần Xuân Thới</td>
-                            <td>ThoiTXGCS18166@fpt.edu.vn</td>
                         </tr>
                         <tr>
                             <td>Phùng Văn Hảo</td>
-                            <td>HaoPVGCS17486@fpt.edu.vn</td>
                         </tr>
                         <tr>
                             <td>Trương Trung Tín</td>
-                            <td>TinTTGCS17082@fpt.edu.vn</td>
                         </tr>
                     </tbody>
                 </table>

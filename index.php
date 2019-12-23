@@ -120,7 +120,9 @@
         <label for="Temperature">Temperature</label><br>
         <canvas id="Temperature" width="1800" height="500"></canvas>
     </div>
-
+    <div>
+        <canvas id="canvas" style="display: block; width: 600px; height: 300px;" width="1800" height="500"></canvas>
+    </div>
 
 
     <?php
@@ -160,7 +162,39 @@
                 pointColor: "#fff",
                 pointStrokeColor: "#9DB86D",
                 data: <?= json_encode($array_Humi); ?>
-            }]
+            }],
+
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Day'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
+                }
+            }
         }
 
         var Temperature = {

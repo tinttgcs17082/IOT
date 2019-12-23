@@ -22,32 +22,10 @@
         <div class="row">
             <div style="text-align: center" class="col-sm-4">
                 <h2>Team member</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Hồ Ngọc Tân</td>
-                            <td>TanHNGCS17077@fpt.edu.vn</td>
-                        </tr>
-                        <tr>
-                            <td>Trần Xuân Thới</td>
-                            <td>ThoiTXGCS18166@fpt.edu.vn</td>
-                        </tr>
-                        <tr>
-                            <td>Phùng Văn Hảo</td>
-                            <td>HaoPVGCS17486@fpt.edu.vn</td>
-                        </tr>
-                        <tr>
-                            <td>Trương Trung Tín</td>
-                            <td>TinTTGCS17082@fpt.edu.vn</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <p>Hồ Ngọc Tân</p>
+                <p>Trương Trung Tín</p>
+                <p>Trần Xuân Thới</p>
+                <p>Phùng Văn Hảo</p>
             </div>
             <div class="col-sm-4">
                 <form action="mqtt.php" method="POST">

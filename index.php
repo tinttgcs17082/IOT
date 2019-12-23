@@ -112,14 +112,14 @@
             $sqli = "SELECT AVG(`Humidity`), AVG(`Temperature`), `Time` FROM `data` where `Time` LIKE '%2019-$i-$j %';";
             $result = mysqli_query($conn, $sqli);
             foreach ($result as $key => $result) {
-                if ($result["Time"] == null or $result["ROUND(AVG(`Humidity`))"] == null or $result["ROUND(AVG(`Temperature`))"] == null) {
+                if ($result["Time"] == null or $result["AVG(`Humidity`)"] == null or $result["AVG(`Temperature`)"] == null) {
                     continue;
                 } else {
-                    array_push($array_Humi, $result["ROUND(AVG(`Humidity`))"]);
+                    array_push($array_Humi, $result["AVG(`Humidity`)"]);
                     $row = $result['Time'];
                     $rowtime = date("d-m-Y", strtotime("$row + 7 HOUR"));
                     array_push($array_Time, $rowtime);
-                    array_push($array_Temp, $result["ROUND(AVG(`Temperature`))"]);
+                    array_push($array_Temp, $result["AVG(`Temperature`)"]);
                 }
             }
         }

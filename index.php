@@ -92,7 +92,7 @@
     </div>
     <div style="text-align: center">
         <label for="Humidity">Humidity</label><br>
-        <canvas name='Humidity' id="Humidity" width="1800" height="500"></canvas><br>
+        <canvas name='Humidity' id="Humidity" width="100%" height="50%"></canvas><br>
     </div>
     <div style="text-align: center">
         <label for="Temperature">Temperature</label><br>
